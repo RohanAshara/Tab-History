@@ -16,10 +16,10 @@ this is a Chrome extension designed to track and visualize your browsing history
    ```
 
 
-2\. Open Chrome and navigate to `chrome://extensions/`.
-3\. Enable "Developer mode" using the toggle in the top right corner.
-4\. Click on "Load unpacked" and select the cloned `Tab-History` directory.
-5\. The extension should now appear in your browser's extension list.([GitHub][1])
+2. Open Chrome and navigate to `chrome://extensions/`.
+3. Enable "Developer mode" using the toggle in the top right corner.
+4. Click on "Load unpacked" and select the cloned `Tab-History` directory.
+5. The extension should now appear in your browser's extension list.([GitHub][1])
 
 ### Usage
 
