@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Browsing History</title>
+  <style>
+    body {
+      background: #121212;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 15px;
+      width: 600px;
+      max-height: 600px;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #ff9800;
+      border-bottom: 1px solid #444;
+      padding-bottom: 5px;
+    }
+
+    .tabs {
+      display: flex;
+      margin-bottom: 15px;
+    }
+
+    .tab {
+      padding: 8px 15px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      color: #888;
+      margin-right: 10px;
+    }
+
+    .tab.active {
+      border-bottom: 2px solid #ff9800;
+      color: #ff9800;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .entry {
+      margin-bottom: 12px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 8px;
+    }
+
+    .url {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      max-width: 580px;
+      color: #8ab4f8;
+    }
+
+    .title {
+      font-weight: bold;
+      margin-bottom: 3px;
+    }
+
+    .meta {
+      font-size: 0.9em;
+      color: #aaa;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .clear-btn {
+      background: #ff5722;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+
+    .clear-btn:hover {
+      background: #e64a19;
+    }
+
+    .empty-state {
+      color: #999;
+      font-style: italic;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 300px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .chart-toolbar {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .history-toolbar {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .chart-type-selector {
+      background: #333;
+      color: white;
+      border: 1px solid #555;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    .time-range-selector {
+      background: #333;
+      color: white;
+      width: 150px;
+      height: 6vh;
+      border: 1px solid #555;
+      padding: 5px 10px;
+      border-radius: 4px;
+
+    }
+
+    #historyList {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .loading {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .generate-btn {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    .generate-btn:hover {
+      background: #388E3C;
+    }
+
+    .chart-message {
+      text-align: center;
+      color: #aaa;
+      padding: 20px;
+    }
+
+    #myInput {
+      height: 5vh;
+      width: 150px;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+      box-sizing: border-box;
+      background-color: #333;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Tab History Tracker</h2>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="history">History</div>
+    <div class="tab" data-tab="statistics">Statistics</div>
+  </div>
+
+  <div class="tab-content active" id="history-tab">
+    <div class="history-toolbar">
+      <select id="timeRange" class="time-range-selector">
+        <option value="today">Today</option>
+        <option value="week">Past Week</option>
+        <option value="month">Past Month</option>
+        <option value="all">All Time</option>
+      </select>
+
+      <input type="text" id="myInput" placeholder="Search for names.." title="Type in a name">
+
+      <button id="clearHistory" class="clear-btn">Clear History</button>
+    </div>
+    <div class="history-container">
+      <div id="historyList"></div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="statistics-tab">
+    <div class="chart-toolbar">
+      <select id="chartType" class="chart-type-selector">
+        <option value="pie">Pie Chart</option>
+        <option value="bar">Bar Chart</option>
+        <option value="line">Line Chart</option>
+      </select>
+
+      <select id="timeRange" class="time-range-selector">
+        <option value="day">Today</option>
+        <option value="week">Past Week</option>
+        <option value="month">Past Month</option>
+        <option value="all">All Time</option>
+      </select>
+
+      <button id="generateChart" class="generate-btn">Generate Graph</button>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="statsChart"></canvas>
+      <div id="chartMessage" class="chart-message">Click "Generate Graph" to see your browsing statistics</div>
+    </div>
+  </div>
+
+  <script src="chart.js"></script>
+  <script src="popup.js"></script>
+</body>
+
+</html>
